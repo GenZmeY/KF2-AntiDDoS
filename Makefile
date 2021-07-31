@@ -1,7 +1,7 @@
 NAME     = kf2-antiddos
 VERSION := $(shell git describe)
 GOCMD    = go
-LDFLAGS := "$(LDFLAGS) -s -w -X 'main.Version=$(VERSION)'"
+LDFLAGS := "$(LDFLAGS) -s -w -X 'main.AppVersion=$(VERSION)'"
 GOBUILD  = $(GOCMD) build -ldflags=$(LDFLAGS)
 SRCMAIN  = ./cmd/$(NAME)
 SRCDOC   = ./doc
@@ -35,7 +35,7 @@ linux-amd64: prep
 windows-amd64: prep
 	GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BIN)-windows-amd64.exe $(SRCMAIN)
 
-compile: linux-386 windows-386 linux-amd64 windows-amd64
+compile: linux-amd64 windows-amd64
 	
 install: check-build doc
 	install -m 755 -d         $(PREFIX)/bin/
