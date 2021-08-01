@@ -38,8 +38,8 @@ WantedBy=multi-user.target
 ```
 #!/bin/bash
 
-firewall-cmd --permanent --add-rich-rule="rule family=ipv4 source address=$1 port port=7777-7815 protocol=udp reject"
-firewall-cmd --reload
+firewall-cmd --add-rich-rule="rule family=ipv4 source address=$1 port port=7777-7815 protocol=udp reject"
+firewall-cmd --add-rich-rule="rule family=ipv4 destination address=$1 reject"
 ```
 
 ### allow.sh
@@ -48,9 +48,9 @@ firewall-cmd --reload
 
 for IP in $@
 do
-        firewall-cmd --permanent --remove-rich-rule="rule family=ipv4 source address=$IP port port=7777-7815 protocol=udp reject"
+        firewall-cmd --remove-rich-rule="rule family=ipv4 source address=$IP port port=7777-7815 protocol=udp reject"
+        firewall-cmd --remove-rich-rule="rule family=ipv4 destination address=$IP reject"
 done
-firewall-cmd --reload
 ```
 
 ## Contributing
