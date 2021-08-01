@@ -8,7 +8,21 @@ The program parses the output of the KF2 server(s) and counts the number of conn
 The program will periodically execute the allow script, passing it a set of IPs blocked in the last period.
 
 ## HowTo:
-Program usage and parameters [see here](https://github.com/GenZmeY/KF2-AntiDDoS/blob/master/doc/README)
+```
+Usage: <kf2_logs_output> | kf2-antiddos [option]... <shell> <deny_script> <allow_script>
+kf2_logs_output            KF2 logs to redirect to stdin
+shell                      shell to run deny_script and allow_script
+deny_script                firewall deny script (takes IP as argument)
+allow_script               firewall allow script (takes IPs as arguments)
+
+Options:
+  -j, --jobs N             allow N jobs at once
+  -o, --output MODE        self|proxy|all|quiet
+ -dt, --deny-time TIME     minimum ip deny TIME (seconds)
+ -mc, --max-connections N  Skip N connections before run deny script
+  -v, --version            Show version
+  -h, --help               Show help
+```
 
 - Prepare an IP deny script for your firewall. The script must block the IP received by the first argument 
 - Prepare an IP set allow script for your firewall. The script must unblock the set of IPs given by the arguments 
