@@ -68,5 +68,5 @@ done
 ```
 
 ## Contributing
-It would be great if someone set up and tried it on windows 
+It would be great if someone set up, tried it on windows and share their experience 
 
