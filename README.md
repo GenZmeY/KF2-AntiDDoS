@@ -28,7 +28,7 @@ Wants=network-online.target
 User=root
 Group=root
 Type=simple
-ExecStart=/bin/sh -c '/usr/bin/kf2-srv log tail | /usr/local/bin/kf2-antiddos-linux-amd64 /bin/bash /usr/local/share/kf2-antiddos/deny.sh /bin/bash /usr/local/share/kf2-antiddos/allow.sh'
+ExecStart=/bin/sh -c '/usr/bin/kf2-srv log tail | /usr/local/bin/kf2-antiddos-linux-amd64 /bin/bash /usr/local/share/kf2-antiddos/deny.sh /usr/local/share/kf2-antiddos/allow.sh'
 Restart=on-failure
 
 [Install]
