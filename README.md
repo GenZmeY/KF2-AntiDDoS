@@ -10,6 +10,7 @@ The program will periodically execute the allow script, passing it a set of IPs 
 ## HowTo:
 ```
 Usage: <kf2_logs_output> | kf2-antiddos [option]... <shell> <deny_script> <allow_script>
+
 kf2_logs_output            KF2 logs to redirect to stdin
 shell                      shell to run deny_script and allow_script
 deny_script                firewall deny script (takes IP as argument)
@@ -18,8 +19,8 @@ allow_script               firewall allow script (takes IPs as arguments)
 Options:
   -j, --jobs N             allow N jobs at once
   -o, --output MODE        self|proxy|all|quiet
- -dt, --deny-time TIME     minimum ip deny TIME (seconds)
- -mc, --max-connections N  Skip N connections before run deny script
+  -t, --deny-time TIME     minimum ip deny TIME (seconds)
+  -c, --max-connections N  Skip N connections before run deny script
   -v, --version            Show version
   -h, --help               Show help
 ```
