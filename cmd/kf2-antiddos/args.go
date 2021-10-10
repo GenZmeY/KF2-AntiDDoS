@@ -20,6 +20,7 @@ func printHelp() {
 	output.Println("  -j, --jobs N             allow N jobs at once")
 	output.Println("  -o, --output MODE        self|proxy|all|quiet")
 	output.Println("  -t, --deny-time TIME     minimum ip deny TIME (seconds)")
+	output.Println("  -a, --allow-time TIME    ip whitelist time after disconnect (seconds)")
 	output.Println("  -c, --max-connections N  Skip N connections before run deny script")
 	output.Println("  -v, --version            Show version")
 	output.Println("  -h, --help               Show help")
@@ -40,6 +41,9 @@ func parseArgs() config.Config {
 
 	gnuflag.UintVar(&rawCfg.DenyTime, "t", 0, "")
 	gnuflag.UintVar(&rawCfg.DenyTime, "deny-time", 0, "")
+
+	gnuflag.UintVar(&rawCfg.AllowTime, "a", 0, "")
+	gnuflag.UintVar(&rawCfg.AllowTime, "allow-time", 0, "")
 
 	gnuflag.UintVar(&rawCfg.MaxConn, "c", 0, "")
 	gnuflag.UintVar(&rawCfg.MaxConn, "max-connections", 0, "")

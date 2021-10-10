@@ -2,9 +2,11 @@ package history
 
 import (
 	"kf2-antiddos/internal/common"
+	"time"
 )
 
 type History struct {
+	ticker    *time.Ticker
 	quit      chan struct{}
 	eventChan *chan common.Event
 	banChan   *chan string
@@ -12,18 +14,19 @@ type History struct {
 	head      byte
 	history   map[byte]common.Event
 	ips       map[string]uint // map[ip]conn_count
-	whitelist map[string]struct{}
+	whitelist map[string]bool
 	banned    map[string]struct{}
 	maxConn   uint
 	workerID  uint
 }
 
-func New(workerID uint, eventChan *chan common.Event, banChan *chan string, resetChan *chan string, maxConn uint) *History {
+func New(workerID uint, eventChan *chan common.Event, banChan *chan string, resetChan *chan string, maxConn uint, allowTime uint) *History {
 	return &History{
+		ticker:    time.NewTicker(time.Duration(allowTime) * time.Second),
 		quit:      make(chan struct{}),
 		ips:       make(map[string]uint, 0),
 		history:   make(map[byte]common.Event, 0),
-		whitelist: make(map[string]struct{}, 0),
+		whitelist: make(map[string]bool, 0),
 		banned:    make(map[string]struct{}, 0),
 		eventChan: eventChan,
 		banChan:   banChan,
@@ -42,7 +45,10 @@ func (h *History) Do() {
 				h.registerEvent(event)
 			case ip := <-*h.resetChan:
 				h.resetIp(ip)
+			case <-h.ticker.C:
+				h.unWhiteList()
 			case <-h.quit:
+				h.ticker.Stop()
 				return
 			}
 		}
@@ -88,16 +94,29 @@ func (h *History) registerConnect(ip string) {
 }
 
 func (h *History) registerNewPlayer(ip string) {
-	h.whitelist[ip] = struct{}{}
+	h.whitelist[ip] = false
 }
 
 func (h *History) registerEndPlayer(ip string) {
-	delete(h.whitelist, ip)
-	delete(h.ips, ip)
-	delete(h.banned, ip)
+	h.whitelist[ip] = true
 }
 
 func (h *History) resetIp(ip string) {
 	delete(h.ips, ip)
 	delete(h.banned, ip)
+}
+
+func (h *History) unWhiteList() {
+	toRemove := make([]string, 0)
+	for ip := range h.whitelist {
+		if h.whitelist[ip] {
+			toRemove = append(toRemove, ip)
+		}
+	}
+
+	for _, ip := range toRemove {
+		delete(h.whitelist, ip)
+		delete(h.ips, ip)
+		delete(h.banned, ip)
+	}
 }

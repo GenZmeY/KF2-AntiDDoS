@@ -60,7 +60,7 @@ func (a *Action) allow(unbanAll bool) {
 	unban := make([]string, 0)
 
 	for ip := range a.ips {
-		if unbanAll || bool(a.ips[ip]) { // aka if readyToUnban
+		if unbanAll || a.ips[ip] { // aka if readyToUnban
 			unban = append(unban, ip)
 		} else {
 			a.ips[ip] = true // mark readyToUnban next time

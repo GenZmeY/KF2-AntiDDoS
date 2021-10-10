@@ -22,6 +22,7 @@ type Config struct {
 	Jobs        uint
 	OutputMode  string
 	DenyTime    uint
+	AllowTime   uint
 	MaxConn     uint
 
 	ShowVersion bool
@@ -78,5 +79,8 @@ func (cfg *Config) SetEmptyArgs() {
 	}
 	if cfg.DenyTime == 0 {
 		cfg.DenyTime = 20 * 60
+	}
+	if cfg.AllowTime == 0 {
+		cfg.AllowTime = 20 * 60
 	}
 }

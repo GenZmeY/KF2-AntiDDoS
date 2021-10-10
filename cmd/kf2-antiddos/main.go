@@ -95,6 +95,7 @@ func main() {
 			&banChan,
 			&resetChan,
 			cfg.MaxConn,
+			cfg.AllowTime,
 		))
 
 	// Action worker
