@@ -30,6 +30,11 @@ Options:
 - Сreate a redirection of the output of all KF2 servers to the stdin of the program 
 - In the parameters specify the scripts that you prepared and the shell that will execute them 
 
+## Raw example
+```
+tail -f ./KFGame/Logs/Launch.log | ./kf2-antiddos-linux-amd64 /bin/bash ./deny.sh ./allow.sh'
+```
+
 ## Centos example 
 (change paths and values as you need) 
 ### systemd service:
