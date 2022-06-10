@@ -32,7 +32,7 @@ Options:
 
 ## Raw example
 ```
-tail -f ./KFGame/Logs/Launch.log | ./kf2-antiddos-linux-amd64 /bin/bash ./deny.sh ./allow.sh'
+tail -f ./KFGame/Logs/Launch.log | ./kf2-antiddos-linux-amd64 /bin/bash ./deny.sh ./allow.sh
 ```
 
 ## Centos example 
