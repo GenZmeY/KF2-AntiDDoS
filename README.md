@@ -57,7 +57,7 @@ WantedBy=multi-user.target
 
 pay attention to this part:  
 `/usr/bin/kf2-srv log tail`  
-I use a self-written system to manage the server - the command specified here combines the output of all server logs into one stdout stream. If you want to protect several servers with antiddos, you also need to combine their logs into one stream. Replace this command with yours.
+I use a self-written system to manage the kf2 servers - the command specified here combines the output of all kf2 server logs into one stdout stream. If you want to protect several servers with antiddos, you also need to combine their logs into one stream. Replace this command with yours.
 
 ### deny.sh
 ```
