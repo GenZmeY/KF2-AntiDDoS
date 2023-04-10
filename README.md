@@ -1,7 +1,28 @@
 # KF2-AntiDDoS
+**DDoS protection of the kf2 server from one of the attacks faced by community**  
 
 Compiled versions for windows and linux are available on the [releases page](https://github.com/GenZmeY/KF2-AntiDDoS/releases).  
 But you can build it yourself, for this there is a Makefile.
+
+## ⚠️ Note ⚠️
+This tool has served well, but since its inception, the community has moved forward in protecting KF2 servers from DDoS.
+
+I highly recommend paying attention to the solution from [baztheallmighty](https://forums.tripwireinteractive.com/index.php?members/baztheallmighty.110378/):  
+[forums.tripwireinteractive.com / KF2 Sever DDos Defence / Post#114](https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/page-6#post-2355626)  
+This method limits the number of connections from each IP so junk traffic is dropped before it even reaches the kf2 server. **It is much more efficient than this tool.**  
+***
+If you want to continue using this tool for any reason, it will be useful to reduce the `ConnectionTimeout` so that fake connections are closed faster and do not overload the server:  
+**PCServer-KFEngine.ini / LinuxServer-KFEngine.ini**  
+```ini
+[IpDrv.TcpNetDriver]
+...
+ConnectionTimeout=20.0
+```
+Thanks to [o2xVc3UuXp0NyBihrUnu](https://forums.tripwireinteractive.com/index.php?members/o2xvc3uuxp0nybihrunu.95080/) for [finding and sharing this setting](https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/page-5#post-2355506).
+***
+The main discussion of the DDoS issue is here:  
+[forums.tripwireinteractive.com/KF2 Sever DDos Defence](https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/)  
+You might find it helpful to follow this thread.  
 
 ## How it works
 The program parses the output of the KF2 server(s) and counts the number of connections. If the number of connections from one IP exceeds the threshold and it is still not known that this is a player, the program will execute a deny script passing it the IP as an argument.  
