@@ -5,6 +5,7 @@ Compiled versions for windows and linux are available on the [releases page](htt
 But you can build it yourself, for this there is a Makefile.
 
 ## ⚠️ Note ⚠️
+### UPDATE 10.04.2023:
 This tool has served well, but since its inception, the community has moved forward in protecting KF2 servers from DDoS.
 
 I highly recommend paying attention to the solution from [baztheallmighty](https://forums.tripwireinteractive.com/index.php?members/baztheallmighty.110378/):  
@@ -23,6 +24,12 @@ Thanks to [o2xVc3UuXp0NyBihrUnu](https://forums.tripwireinteractive.com/index.ph
 The main discussion of the DDoS issue is here:  
 [forums.tripwireinteractive.com/KF2 Sever DDos Defence](https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/)  
 You might find it helpful to follow this thread.  
+### UPDATE 06.09.2023:
+[o2xVc3UuXp0NyBihrUnu](https://forums.tripwireinteractive.com/index.php?members/o2xvc3uuxp0nybihrunu.95080/) adapted the [baztheallmighty](https://forums.tripwireinteractive.com/index.php?members/baztheallmighty.110378/) idea for firewall-cmd, which is quite handy:
+```
+firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p udp --dport 7777:7797 -m connlimit --connlimit-above 5 --connlimit-mask 20 -j DROP
+```
+**Source:** https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/post-2358698
 
 ## How it works
 The program parses the output of the KF2 server(s) and counts the number of connections. If the number of connections from one IP exceeds the threshold and it is still not known that this is a player, the program will execute a deny script passing it the IP as an argument.  
