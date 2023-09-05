@@ -9,7 +9,7 @@ But you can build it yourself, for this there is a Makefile.
 This tool has served well, but since its inception, the community has moved forward in protecting KF2 servers from DDoS.
 
 I highly recommend paying attention to the solution from [baztheallmighty](https://forums.tripwireinteractive.com/index.php?members/baztheallmighty.110378/):  
-[forums.tripwireinteractive.com / KF2 Sever DDos Defence / Post#114](https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/page-6#post-2355626)  
+https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/page-6#post-2355626  
 This method limits the number of connections from each IP so junk traffic is dropped before it even reaches the kf2 server. **It is much more efficient than this tool.**  
 ***
 If you want to continue using this tool for any reason, it will be useful to reduce the `ConnectionTimeout` so that fake connections are closed faster and do not overload the server:  
