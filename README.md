@@ -31,6 +31,11 @@ firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p udp --dport 
 ```
 **Source:** https://forums.tripwireinteractive.com/index.php?threads/kf2-or-any-unreal-engine-3-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-firewalld.2337631/post-2358698
 
+### Update 04.10.2023
+It looks like the author of the original ddos thread on the forum can no longer keep it up to date, so he moved all the information here:  
+https://www.zsdr.org/index.php/2023/10/03/killing-floor-2-or-any-unreal-engine-3-dedicated-server-on-redhat-centos-rocky-alma-linux-ddos-defense-with-the-help-of-iptables-firewalld/  
+It makes sense to follow this post  
+
 ## How it works
 The program parses the output of the KF2 server(s) and counts the number of connections. If the number of connections from one IP exceeds the threshold and it is still not known that this is a player, the program will execute a deny script passing it the IP as an argument.  
 The program will periodically execute the allow script, passing it a set of IPs blocked in the last period.
