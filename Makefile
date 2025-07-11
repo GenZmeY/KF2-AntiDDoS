@@ -7,7 +7,7 @@ SRCMAIN  = ./cmd/$(NAME)
 SRCDOC   = ./doc
 BINDIR   = bin
 BIN      = $(BINDIR)/$(NAME)
-README   = $(SRCDOC)/README
+USAGE    = $(SRCDOC)/USAGE
 LICENSE  = LICENSE
 PREFIX   = /usr
 
@@ -21,7 +21,7 @@ prep: clean
 	
 doc: check-build
 	test -d $(SRCDOC) || mkdir $(SRCDOC)
-	$(BIN) --help > $(README)
+	$(BIN) --help > $(USAGE)
 	
 build: prep
 	$(GOBUILD) -o $(BIN) $(SRCMAIN)
@@ -43,7 +43,7 @@ install: check-build doc
 	install -m 755 -d         $(PREFIX)/share/licenses/$(NAME)/
 	install -m 644 $(LICENSE) $(PREFIX)/share/licenses/$(NAME)/
 	install -m 755 -d         $(PREFIX)/share/doc/$(NAME)/
-	install -m 644 $(README)  $(PREFIX)/share/doc/$(NAME)/
+	install -m 644 $(USAGE)   $(PREFIX)/share/doc/$(NAME)/
 
 check-install:
 	test -e $(PREFIX)/bin/$(NAME) || \
